@@ -1,0 +1,57 @@
+.container{
+    background-color: #ff5f00;
+}
+
+.filterCar{
+    border-bottom: 1px solid #000;
+    margin-bottom: 50px;
+}
+
+.filterCar div{
+    height: 100px;
+    /* padding: 0 50px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+    /* height: 200px; */
+}
+
+.resultsCars{
+    display: flex;
+    padding: 0 50px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.car-description{
+    font-size: 30px;
+    /* color: #ff5f00; */
+}
+
+span{
+    padding: 10px;
+    font-weight: 900;
+    color: #ff5f00;
+    background-color: #000;
+}
+
+#checkbox{
+    position: absolute;
+    flex-direction: column;
+    top: 460px;
+    left: 248px;
+    height: 300px;
+    width: 300px;
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+#checkbox div{
+    width: 200px;
+    height: 50px;
+}
+
+input[type='checkbox'] {
+    margin-right: 15px;
+}

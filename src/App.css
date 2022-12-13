@@ -4,7 +4,7 @@
 /* Components */
 @import url('./components//Header/Header.css');
 @import url('./components/Footer/Footer.css');
-@import url('./components/Autocomplete/Autocomplete.css');
+@import url('./components/Search/Search.css');
 
 /* Pages */
 @import url('./pages/Home//Home.css');
@@ -21,6 +21,15 @@
     display: flex;
     align-items: center; 
     justify-content:space-between;
+    gap: 20px;
+}
+
+.flex-center-center{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; 
+    flex-direction: column;
+    justify-content:center;
     gap: 20px;
 }
 

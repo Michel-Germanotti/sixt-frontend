@@ -13,16 +13,17 @@ import Personnaldetails from './pages/Personnaldetails/Personnaldetails';
 import Backoffice from './pages/Backoffice/Backoffice';
 
 function App() {
+  
   return (
     <Router>
       <Header />
 
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='offerlist' element={<Offerlist />}/>
-        <Route path='offerconfig' element={<Offerconfig />}/>
-        <Route path='personnaldetails' element={<Personnaldetails />}/>
-        <Route path='backoffice' element={<Backoffice />}/>
+        <Route path='/offerlist' element={<Offerlist />}/>
+        <Route path='/offerconfig' element={<Offerconfig />}/>
+        <Route path='/personnaldetails' element={<Personnaldetails />}/>
+        <Route path='/backoffice' element={<Backoffice />}/>
       </Routes>
 
       <Footer />

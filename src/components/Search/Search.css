@@ -3,8 +3,21 @@
 }
 
 .search {
-    height: 250px;
-    /* background-color: #000; */
+  height: 200px;
+  padding: 0 50px;
+  background-color: #000;
+  gap: 50px;
+  padding-top: 100px;
+}
+
+.autocomplete input{
+  width: 35vw;
+  margin-right: 40px;
+}
+
+.searchSelect{
+  color: #000;
+  cursor: pointer;
 }
 
 .dropdown {
@@ -25,3 +38,35 @@
   .dropdown:hover .dropdown-content {
     display: block;
   }
+
+.agency{
+  padding: 20px;
+  background-color: #fff;
+  /* border-bottom: "solid 2px red"; */
+  color: #000;
+  z-index: 1;
+  position: relative;
+}
+
+.search-input{
+  background-color: #000;
+  font-size: 20px;
+  margin-top: 5px;
+  border: none;
+  width: 100%;
+  border-bottom: solid 3px #fff;
+  color: #FFF;
+}
+
+button.toUppercase{
+  background-color: #ff5f00;
+  padding: 30px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+button.toUppercase:disabled{
+  background-color: grey;
+}

@@ -1,0 +1,24 @@
+.subline{
+    background-color: #000;
+    margin: none;
+}
+
+.subline h3{
+    font-size: 25px;
+    margin-top: -5px;
+    color: #fff;
+    padding: 20px;
+}
+
+.backgroundOrange h2{
+    font-size: 35px;
+    padding-top: 20px;
+    margin-bottom: 40px;
+    font-weight: 900;
+}
+
+.backgroundOrange h3{
+    font-size: 25px;
+    margin-bottom: 40px;
+    font-weight: 500;
+}

@@ -1,4 +1,4 @@
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCar, faCheck, faLocationArrow, faRoadCircleCheck, faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Cookies from 'js-cookie'
@@ -88,8 +88,16 @@ export default function Offerconfig() {
           {data.additionalCharges.map((item) => {
             return <div >
               <div className='optionsCards'>
-                <h3 className='toUppercase'>{item.title}</h3>
-                <p>{item.description}</p>
+                <div>
+                  <span style={{width: 50, marginRight: 20, fontSize:30, color: "#ff5f00"}}>{item.title === "Péage express illimité" && <FontAwesomeIcon icon={faRoadCircleCheck} />}</span>
+                  <span style={{width: 50, marginRight: 20, fontSize:30, color: "#ff5f00"}}>{item.title === "Protégez votre location" && <FontAwesomeIcon icon={faCar} />}</span>
+                  <span style={{width: 50, marginRight: 20, fontSize:30, color: "#ff5f00"}}>{item.title === "SIXT Connect Plus" && <FontAwesomeIcon icon={faWifi} />}</span>
+                  <span style={{width: 50, marginRight: 20, fontSize:30, color: "#ff5f00"}}>{item.title === "Système de Navigation garanti" && <FontAwesomeIcon icon={faLocationArrow} />}</span>
+                </div>
+                  
+                <div>
+                  <h3 className='toUppercase'>{item.title}</h3>
+                   <p>{item.description}</p></div>
               </div>
             </div>
           

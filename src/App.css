@@ -11,7 +11,7 @@
 @import url('./pages/Offerlist/Offerlist.css');
 @import url('./pages/Personnaldetails/Personnaldetails.css');
 @import url('./pages/Backoffice/Backoffice.css');
-@import url('./pages/Offerlist/Offerlist.css');
+@import url('./pages/Offerconfig/Offerconfig.css');
 
 *, div{
     font-family: "Roboto";
@@ -39,4 +39,21 @@
 
 .orange{
     color: #ff5f00;
+}
+
+.mySwiper{
+    z-index: 0!important;
+}
+
+.backgroundOrange{
+    padding: 20px;
+    background-color: #ff5f00;
+}
+
+.fs-30{
+    font-size: 30px;
+}
+
+.fs-25{
+    font-size: 25px;
 }

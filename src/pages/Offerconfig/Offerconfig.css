@@ -22,3 +22,28 @@
     margin-bottom: 40px;
     font-weight: 500;
 }
+
+
+
+/* Option cards */
+.optionsCardsContainer{
+    display: flex;
+    max-width: 1200px;
+    flex-wrap: wrap;
+}
+
+.optionsCards{
+    color: #fff;
+    width: 450px;
+    margin: 20px;
+    height: 200px;
+    padding: 20px;
+    background-color: #000;
+    cursor: pointer;
+}
+
+.optionsCards:hover{
+    color: #000;
+
+    background-color: #fff;
+}

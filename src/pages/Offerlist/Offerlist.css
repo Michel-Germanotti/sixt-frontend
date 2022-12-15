@@ -1,5 +1,6 @@
 .container{
     background-color: #ff5f00;
+    padding: 0 50px;
 }
 
 .filterCar{
@@ -19,17 +20,19 @@
 
 .resultsCars{
     display: flex;
-    padding: 0 50px;
     flex-wrap: wrap;
     justify-content: space-around;
+    gap: 40px;
 }
 
 .car-description{
     font-size: 30px;
-    /* color: #ff5f00; */
+    margin-bottom: 20px;
+    color: #ff5f00;
+    line-height: 6vh;
 }
 
-span{
+h2 span{
     padding: 10px;
     font-weight: 900;
     color: #ff5f00;
@@ -39,7 +42,7 @@ span{
 #checkbox{
     position: absolute;
     flex-direction: column;
-    top: 460px;
+    top: 35vh;
     left: 248px;
     height: 300px;
     width: 300px;
@@ -54,4 +57,78 @@ span{
 
 input[type='checkbox'] {
     margin-right: 15px;
+}
+
+.priceDay{
+    font-size: 25px;
+    color: #fff;
+    margin: 15px 0;
+}
+
+.modal-container{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;   
+    position: fixed;
+    top:0px;
+    background-color: rgba(0, 0, 0, 0.47);
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.modal-description{
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+    color: #fff;
+    width: 100%;
+    background-color: black;
+    font-size: 20px;
+    padding: 25px;
+}
+
+.swiper-slide{
+    width: 100%;
+}
+
+.closeModal{
+    color: #fff;
+    font-size: 25px;
+    position: absolute;
+    bottom: 70vh;
+    right: 5vw;
+    z-index: 2;
+    cursor: pointer;
+}
+
+
+
+.closeModal:hover{
+    color: #ff5f00;
+}
+
+.total{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding: 30px;
+    background-color: #000;
+    width: 30%;
+}
+
+.total div:first-child{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-select{
+    width: 100%;
+    background-color: #ff5f00;
+    text-align: center;
+    padding: 30px;
+    font-weight: 900;
+    font-size: 25px;
+    cursor: pointer;
 }

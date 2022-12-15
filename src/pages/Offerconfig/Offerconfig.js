@@ -45,8 +45,10 @@ export default function Offerconfig() {
   return isLoading ? <p>Loading... </p> : (
     <div> 
       <Search />
-      <div>
+      <div className='flex-center-between'>
+        {/* Titre */}
         <h2 className='car-description toUppercase' style={{position: "absolute", top: "35vh", left: "2vw"}}><span>{Cookies.get("model")}</span></h2>
+        
         {/* Carousel */}
         <Swiper 
           slidesPerView={1}
@@ -62,18 +64,42 @@ export default function Offerconfig() {
             {data.splashImages.map((image) => <SwiperSlide ><img style={{width: "100%"}}src={image} alt="ff"/></SwiperSlide>)}
         </Swiper>
       </div>
+        
+        {/* Baseline */}
       <div className='subline'>
         <h3 className='toUppercase'>{Cookies.get("subline")}</h3>
       </div>
+        
+        {/* Choisissez votre protection */}
       <div className='backgroundOrange'>
         <h2 className='toUppercase'>Choisissez votre protection et vos options</h2>
         <h3 className='toUppercase'>Votre offre inclut</h3>
         <div>
           {data.includedCharges.map((item) => <p><FontAwesomeIcon icon={faCheck} />{item.title}</p>)}
         </div>
-      {/* {data.additionalCharges.map((fraisSupp) => console.log(fraisSupp))} */}
-      </div>
+      
+        {/* Choisissez vos options */}
+        <div>
+          <h2 className='toUppercase'>Choisissez vos options</h2>
+        </div>
      
+          {/* Options */}
+        <div className='optionsCardsContainer'>
+          {data.additionalCharges.map((item) => {
+            return <div >
+              <div className='optionsCards'>
+                <h3 className='toUppercase'>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </div>
+          
+          })}
+        </div>
+      
+      
+      </div>
+
+      
     </div>
   )
 }

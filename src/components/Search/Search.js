@@ -18,29 +18,50 @@ export default function Search() {
   // States
   const [display, setDisplay] = useState("block");
 
-    // States of datepicker
-    const [startDate, setStartDate] = useState(new Date());
-    const [returnDate, setReturnDate] = useState(new Date());
 
-    // States of autocomplete
-    const [autocomplete, setAutocomplete] = useState();
-    const [dropdown, setDropdown] = useState();
+    // Calcul entre 2 dates
+      // States of datepicker
+      const [startDate, setStartDate] = useState(new Date());
+      const [returnDate, setReturnDate] = useState(new Date());
 
     // Autocomplete
+      // States of autocomplete
+      const [autocomplete, setAutocomplete] = useState();
+      // console.log("autocomplete => ",autocomplete);
+      const [dropdown, setDropdown] = useState();
+      const [inputValue, setInputValue] = useState(' ');
         // Première requête pour récupérer l'id
-    const location = async (location) => {
-      const response = await axios.get(`http://localhost:4000/locations?q=${location}`);
+      const location = async (location, inputValue) => {
+        // J'instancie la value d'input (pour éviter les erreurs)
+        setInputValue(inputValue);
+      const response = await axios.get(`https://site--sixt-backend--pb6rn2qrqzj6.code.run/locations?q=${location}`);
+      // const response = await axios.get(`http://localhost:4000/locations?q=${location}`);
+      console.log(response.data);
+      Cookies.set("reponseFilter", response.data);
       // console.log(response.data);
       setAutocomplete(response.data);
     }
   
+  // Form submit
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      const url = `http://localhost:4000/rentaloffers?pickupStation=${dropdown.id}&returnStation=${dropdown.id}&pickupDate=${startDate.toJSON().slice(0, 19)}&returnDate=${returnDate.toJSON().slice(0, 19)}`
-            
+      
+      // ------- Infos -------
+      const url = `https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentaloffers?pickupStation=${dropdown.id}&returnStation=${dropdown.id}&pickupDate=${startDate.toJSON().slice(0, 19)}&returnDate=${returnDate.toJSON().slice(0, 19)}`;
+      console.log(url);
       // Je stock l'url dans les cookies pour pouvoir faire une nouvelle requête
       Cookies.set('result', url);
+       
+        // ------- Date --------
+        // Je récup la différence en millisecondes entre les 2 dates à partir du 1er janvier 1970 00:00
+        const dateDiff = returnDate.getTime() - startDate.getTime();
+        // Je convertis en jour
+        const intervalle = Math.round(dateDiff / (1000 * 3600 * 24));
+  
+        // Cookies
+        Cookies.set("dateDiff", intervalle);
+      
       navigate("/offerlist");
     } catch (error) {
         console.log(error.response);
@@ -56,13 +77,26 @@ export default function Search() {
           <div>
             <div className='orange'>Retrait et Retour</div>
               <div className="autocomplete">
-                <input className="search-input" type="text" placeholder='Trouver une agence' onChange={(event) => location(event.target.value)} />
+                
+                {/* Saisie */}
+                <input 
+                  className="search-input" 
+                    type="text" 
+                    placeholder='Trouver une agence' 
+                    onChange={(event) => location(event.target.value, event.target.value) && setDisplay("block")} value={inputValue}/>
+                    {/* {inputValue && console.log(inputValue)} */}
+                
+                {/* Dropdown saisie */}
                 {autocomplete && <div className='agency' style={{display : display}} >
                   <p style={{paddingBottom: 20, color: "#ff5f00"}}>Agences</p>
                   {autocomplete.map((item, index) => 
-                    <p key={index} className="searchSelect" onClick={() => {setDropdown(item); setDisplay("none")}}>{item.title}</p>) }
-                </div>}
+                    <p key={index} className="searchSelect" onClick={() => {
+                      setDropdown(item) ; setDisplay("none"); setInputValue(item.title)}
+                      }>{item.title}</p>)}
+                </div> }
+
               </div> 
+              
           </div>
 
           {/* Date de départ */}
@@ -73,7 +107,7 @@ export default function Search() {
                   <DatePicker
                     className='search-input'
                     selected={startDate}
-                    onChange={(date) => setStartDate(date)}
+                    onChange={(date) => setStartDate(date)} 
                     showTimeSelect
                     timeFormat="HH:mm"
                     minTime={setHours(setMinutes(new Date(), 0), 17)}
@@ -82,7 +116,7 @@ export default function Search() {
                   />          
               </div>
             </div>
-
+                        
             {/* Date de retour */}
             <div>
               <div className='orange'>Date de retour</div>
@@ -90,7 +124,7 @@ export default function Search() {
                   <DatePicker
                     className='search-input' 
                     selected={returnDate} 
-                    onChange={(date) => setReturnDate(date)} 
+                    onChange={(date) => setReturnDate(date)}
                     showTimeSelect
                     timeFormat="HH:mm"
                     minTime={setHours(setMinutes(new Date(), 0), 17)}
@@ -103,7 +137,11 @@ export default function Search() {
             {/* Submit */}
             <div>
               {/* Si la date de départ n'est pas supérieur à la date de retour */}
-              <button type='submit' className='toUppercase' disabled={startDate > returnDate || (!dropdown && "disabled") ? "disabled" : "" }>Voir les offres</button>
+              <button 
+                type='submit' 
+                className='toUppercase' 
+                disabled={startDate > returnDate || (!dropdown && "disabled") ? "disabled" : "" }
+                >Voir les offres</button>
             </div>
 
           </div>

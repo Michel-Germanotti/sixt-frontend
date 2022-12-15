@@ -34,9 +34,9 @@ export default function Home() {
           navigation={true}
           modules={[Pagination, Navigation]}
           className="mySwiper">
-        <SwiperSlide><img className='carousel-img' src={require("/Users/michelgermanotti/LeReacteur/Projects/Sixt/sixt-frontend/src/assets/img/carousel/49dbc80f-3566-46f9-b294-b2fddb2fe8ae.jpeg")} alt='he'/></SwiperSlide>
-        <SwiperSlide><img className='carousel-img' src={require("/Users/michelgermanotti/LeReacteur/Projects/Sixt/sixt-frontend/src/assets/img/carousel/391cd6c1-8042-4ada-bfbf-6da86c8e5527.jpeg")} alt='he'/></SwiperSlide>
-        <SwiperSlide><img className='carousel-img' src={require("/Users/michelgermanotti/LeReacteur/Projects/Sixt/sixt-frontend/src/assets/img/carousel/cfc9edb1-3e28-4ecd-8de5-21425d7d29ce.jpeg")} alt='he'/></SwiperSlide>
+        <SwiperSlide><img className='carousel-img' src={require("../../assets/img/carousel/49dbc80f-3566-46f9-b294-b2fddb2fe8ae.jpeg")} alt='he'/></SwiperSlide>
+        <SwiperSlide><img className='carousel-img' src={require("../../assets/img/carousel/391cd6c1-8042-4ada-bfbf-6da86c8e5527.jpeg")} alt='he'/></SwiperSlide>
+        <SwiperSlide><img className='carousel-img' src={require("../../assets/img/carousel/cfc9edb1-3e28-4ecd-8de5-21425d7d29ce.jpeg")} alt='he'/></SwiperSlide>
       </Swiper>
         
         <div style={{backgroundColor: "#000", display: "flex", alignItems: "center", height: 800, padding: 100}}>

@@ -92,11 +92,10 @@ export default function Offerlist({setSelectCar}) {
     }
 
   // Modal
-  const setModal = (display, car) => {
-
-    // const url = `https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentaloffers?pickupStation=${dropdown.id}&returnStation=${dropdown.id}&pickupDate=${startDate.toJSON().slice(0, 19)}&returnDate=${returnDate.toJSON().slice(0, 19)}`;
-    // console.log(url);
-
+  const setModal = async (display, car) => {
+    console.log(car)
+    // const response = await axios.post("https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentalconfigurations/create", car.id);
+    // console.log(response);
     console.log(car.id);
     setCarInfos(car);
     if(display){
@@ -121,7 +120,7 @@ export default function Offerlist({setSelectCar}) {
       {/* Modal description (n'apparait que si carInfos n'est pas vide) */}
       {carInfos && 
         <div className='modal-container' style={{display: displayModal}} >
-          <div className='closeModal' onClick={() => setModal(false)}><FontAwesomeIcon icon={faXmark} /></div>
+          <div className='closeModal' onClick={() => setModal(false, "")}><FontAwesomeIcon icon={faXmark} /></div>
             <div className="modal-description">
                 <div>
                     <div className="description-header" style={{position: "relative", top: 50}}>

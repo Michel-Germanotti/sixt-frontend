@@ -36,14 +36,9 @@ export default function Offerconfig({setSelectCar}) {
   const [allOptions, setAllOptions] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
-
-  console.log(Cookies.get("model"));
-  console.log(Cookies.get("subline"));
-  console.log(Cookies.get("totalSansOptions"));
-
   useEffect(() => {
     const getData = async ()  => {
-      setSelectCar(2)
+      setSelectCar(2);
       try {
         const response = await axios.post("https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentalconfigurations/create", { offerId :Cookies.get("sélectionLocationId")});
         // const response = await axios.post("http://localhost:4000/rentalconfigurations/create", { offerId :Cookies.get("sélectionLocationId")});
@@ -58,15 +53,32 @@ export default function Offerconfig({setSelectCar}) {
   }, [])
 
 
-  const somme = (amount)  => {
-
-    setTotalConfig(amount + Number(totalConfig));
-    return totalConfig.toFixed(2)
-  } 
-
   // Etat des options
-  const handleClick = () => {
-    !isActive ? setIsActive(true): setIsActive(false);
+  const handleClick = (price, event) => {
+      let nb = Number(Cookies.get("totalSansOptions"));
+
+    if (!isActive) {
+
+      // Toggle of class
+      event.currentTarget.classList.remove('optionsCards');
+      event.currentTarget.classList.add('optionsCardsSelect');
+      
+      // add price
+      Cookies.set("totalSansOptions", nb + price);
+      setTotalConfig(nb + price);
+      setIsActive(true);
+    } else{
+      
+      // Toggle of class
+      event.currentTarget.classList.remove('optionsCardsSelect');
+      event.currentTarget.classList.add('optionsCards');
+      
+      // remove price
+      Cookies.set("totalSansOptions", nb - price);
+      setTotalConfig(nb - price);
+      setIsActive(false);
+    } 
+    
   }
 
 
@@ -119,21 +131,21 @@ export default function Offerconfig({setSelectCar}) {
               <div className='optionsCardsContainer'>
 
                   {data.additionalCharges.map((item, index) => {
-                    return <div onClick={() => somme(item.price.amount) && handleClick()}>
+                    return <div>
                       {
                         !allOptions ?
                         // 5 options max
                         index < 5 &&
-                        <div className={isActive ? 'optionsCardsSelect' : 'optionsCards'}>
+                        <div className='optionsCards'  onClick={(event) =>  handleClick(item.price.amount, event)}>
                             
-                          <div>
+                          <div on>
                             <h3 className='toUppercase'>{item.title}</h3>
                             <p>{item.description}</p></div>
                             <p><FontAwesomeIcon icon={faEuroSign} /> {item.price.amount} {item.price.unit} </p>
                         </div>
                         :   
                         // Toutes les options
-                        <div className='optionsCards'>
+                        <div className='optionsCards' onClick={(event) =>  handleClick(item.price.amount, event)}>
                           <div>
                             <h3 className='toUppercase'>{item.title}</h3>
                             <p>{item.description}</p></div>
@@ -158,7 +170,7 @@ export default function Offerconfig({setSelectCar}) {
           <div className='sticky'>
             <div className='flex-center-between'>
               <div className='mb-10 toUppercase'>Total</div>
-              <div className='white mb-10'><FontAwesomeIcon icon={faEuroSign} />  {totalConfig}</div>
+              <div className='white mb-10'><FontAwesomeIcon icon={faEuroSign} />  {Math.round(totalConfig * 100) / 100}</div>
             </div>
             <div className='flex-center-between'>
               <div className='white'>Détails du prix</div>

@@ -30,17 +30,18 @@ export default function Search() {
       // console.log("autocomplete => ",autocomplete);
       const [dropdown, setDropdown] = useState();
       const [inputValue, setInputValue] = useState(' ');
+      
         // Première requête pour récupérer l'id
       const location = async (location, inputValue) => {
-        // J'instancie la value d'input (pour éviter les erreurs)
-        setInputValue(inputValue);
-      const response = await axios.get(`https://site--sixt-backend--pb6rn2qrqzj6.code.run/locations?q=${location}`);
-      // const response = await axios.get(`http://localhost:4000/locations?q=${location}`);
-      console.log(response.data);
-      Cookies.set("reponseFilter", response.data);
-      // console.log(response.data);
-      setAutocomplete(response.data);
-    }
+          // J'instancie la value d'input (pour éviter les erreurs)
+          setInputValue(inputValue);
+        const response = await axios.get(`https://site--sixt-backend--pb6rn2qrqzj6.code.run/locations?q=${location}`);
+        // const response = await axios.get(`http://localhost:4000/locations?q=${location}`);
+        console.log(response.data);
+        Cookies.set("reponseFilter", response.data);
+        // console.log(response.data);
+        setAutocomplete(response.data);
+      }
   
   // Form submit
   const handleSubmit = async (event) => {

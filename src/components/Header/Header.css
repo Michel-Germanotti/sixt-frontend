@@ -1,4 +1,13 @@
 header{
     padding: 0 50px;
-    border-bottom: #ff5f00 solid 2px;
+    /* border-bottom: #ff5f00 solid 2px; */
+}
+
+.numbers{
+    background-color: #ff5f00;
+    padding: 10px 15px;
+    margin: 0 20px;
+    color: #fff;
+    width: 50px;
+    border-radius: 100%;
 }

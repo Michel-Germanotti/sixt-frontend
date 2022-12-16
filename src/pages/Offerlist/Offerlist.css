@@ -1,4 +1,4 @@
-.container{
+.container-list{
     background-color: #ff5f00;
     padding: 0 50px;
 }
@@ -96,7 +96,7 @@ input[type='checkbox'] {
     color: #fff;
     font-size: 25px;
     position: absolute;
-    bottom: 70vh;
+    bottom: 80vh;
     right: 5vw;
     z-index: 2;
     cursor: pointer;

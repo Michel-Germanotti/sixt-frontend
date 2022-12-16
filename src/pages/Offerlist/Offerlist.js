@@ -19,15 +19,15 @@ import { faCar, faCheck, faChevronDown, faEuroSign, faGauge, faPersonThroughWind
   // import required modules
   import { Pagination, Navigation } from "swiper";
 
-
-
 import { faCalendarDays, faSnowflake } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
-export default function Offerlist() {
+export default function Offerlist({setSelectCar}) {
 
+  
   const navigate = useNavigate();
 
+  // Data
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,6 +43,7 @@ export default function Offerlist() {
   const [carInfos, setCarInfos] = useState();
 
   useEffect(() => {
+    setSelectCar(1);
     const getData = async ()  => {
       const url = Cookies.get('result') ? Cookies.get('result') : `https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentaloffers?pickupStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&returnStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&pickupDate=2022-12-05T09:47:53&returnDate=2022-12-14T09:47:53`;
       // const url = Cookies.get('result') ? Cookies.get('result') : `http://localhost:4000/rentaloffers?pickupStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&returnStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&pickupDate=2022-12-05T09:47:53&returnDate=2022-12-14T09:47:53`;
@@ -76,7 +77,7 @@ export default function Offerlist() {
     // Je récupe le nb de jours de location
     const dateDiff = Cookies.get("dateDiff");  
     const dateDiffCalc = (prices) => {
-      return (prices * dateDiff).toFixed(2);
+      return (prices + (prices * dateDiff)).toFixed(2);
     }     
 
     // Filtre le tableau des résultats
@@ -92,6 +93,11 @@ export default function Offerlist() {
 
   // Modal
   const setModal = (display, car) => {
+
+    // const url = `https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentaloffers?pickupStation=${dropdown.id}&returnStation=${dropdown.id}&pickupDate=${startDate.toJSON().slice(0, 19)}&returnDate=${returnDate.toJSON().slice(0, 19)}`;
+    // console.log(url);
+
+    console.log(car.id);
     setCarInfos(car);
     if(display){
       setDisplayModal("flex");
@@ -105,7 +111,7 @@ export default function Offerlist() {
   const toConfig = (model, subline) => {
     Cookies.set("model", model );
     Cookies.set("subline", subline);
-    navigate('/offerconfig', Cookies.set("sélectionLocationId", carInfos.id))
+    navigate('/offerconfig', Cookies.set("sélectionLocationId", carInfos.id), Cookies.set("totalSansOptions", dateDiffCalc(carInfos.prices.dayPrice.amount)))
   }
 
   return isLoading ? <p>Loading...</p> : (
@@ -130,18 +136,8 @@ export default function Offerlist() {
                       </div>
                     </div>
                     <div>
-                    <Swiper 
-                      slidesPerView={1}
-                      spaceBetween={30}
-                      loop={true}
-                      pagination={{
-                        clickable: true,
-                      }}
-                      navigation={true}
-                      modules={[Pagination, Navigation]}
-                      className="mySwiper">
-                        <SwiperSlide ><img style={{width: "100%"}} src={carInfos.images.large} alt={carInfos.headlines.description}/></SwiperSlide>
-                      </Swiper>
+                      <img style={{width: "100%"}} src={carInfos.images.large} alt={carInfos.headlines.description}/>
+   
                     </div>
                   </div>
                 <div className='total'>
@@ -152,14 +148,14 @@ export default function Offerlist() {
                           <p>Taxes incluses</p>
                         </div>
                     </div>
-                    <div style={{marginTop: 25}} className='toUppercase btn-select' onClick={() => toConfig(carInfos.headlines.description, carInfos.headlines.longSubline)}>Sélectionner</div>
+                    <div style={{marginTop: 25}} className='toUppercase btn-select' onClick={() => toConfig(carInfos.headlines.description, carInfos.headlines.longSubline) && Cookies.set("totalConfig", carInfos.prices.dayPrice.amount)}>Sélectionner</div>
                 </div>
             </div>
         </div> 
       }
 
       {/* Filter */}
-      <div className='container'>
+      <div className='container-list'>
         <div className="filterCar">
           <div>
             <div>{count} - Offres</div>

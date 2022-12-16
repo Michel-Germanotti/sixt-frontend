@@ -17,8 +17,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Components
 import Search from '../../components/Search/Search';
 import { faApple, faGooglePlay } from '@fortawesome/free-brands-svg-icons';
+import { useEffect } from 'react';
 
-export default function Home() {
+export default function Home({setSelectCar}) {
+
+  useEffect(() => {
+    setSelectCar(0);
+  })
 
   return (
     <div>
@@ -40,7 +45,7 @@ export default function Home() {
       </Swiper>
         
         <div style={{backgroundColor: "#000", display: "flex", alignItems: "center", height: 800, padding: 100}}>
-          <h2 style={{position: "absolute", color: "#FFF", top: "135vh", left: 20, zIndex: 9, fontSize: 40}} className='toUppercase'>Les agences sixt dans le monde</h2>
+          <h2 style={{position: "absolute", color: "#FFF", top: "115vh", left: 20, zIndex: 9, fontSize: 40}} className='toUppercase'>Les agences sixt dans le monde</h2>
           <img style={{width: "100%", margin:"auto"}} src={require("../../assets/img/sixt-in-the-world.png")} alt="trouver une agence"/>
           <div className='toUppercase' style={{position: "absolute", color: "#fff", left: "85vw", top: "200vh", fontSize: 25, border: "solid 5px #fff", padding: 15}}>Trouver l'agence</div>
         </div>

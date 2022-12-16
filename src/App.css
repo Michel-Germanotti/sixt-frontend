@@ -17,11 +17,25 @@
     font-family: "Roboto";
 }
 
+h1{
+    font-size: 30px;
+}
+
 .flex-center-between{
     display: flex;
     align-items: center; 
     justify-content:space-between;
     gap: 20px;
+}
+
+.container{
+    width: 1280px;
+    margin: auto;
+}
+
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
 }
 
 .flex-center-center{
@@ -56,4 +70,12 @@
 
 .fs-25{
     font-size: 25px;
+}
+
+.mb-10{
+    margin-bottom: 10px;
+}
+
+.white{
+    color: #fff;
 }

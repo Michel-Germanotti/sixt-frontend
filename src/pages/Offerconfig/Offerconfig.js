@@ -1,4 +1,4 @@
-import { faCar, faCheck, faEuroSign, faLocationArrow, faRoadCircleCheck, faWifi } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faEuroSign } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Cookies from 'js-cookie'
@@ -37,7 +37,7 @@ export default function Offerconfig({setSelectCar}) {
   const [isActive, setIsActive] = useState(false);
 
   // Modal
-  const [display, setDisplay] = useState("none");
+  // const [display, setDisplay] = useState("none");
 
 
   useEffect(() => {
@@ -91,13 +91,13 @@ export default function Offerconfig({setSelectCar}) {
       <Search />
 
       {/* Modal détail du prix */}
-      <div style={{display : display}}>
+      {/* <div style={{display : display}}>
         <h2 className="toUppercase">Détails du prix</h2>
         <h3 className="toUppercase">Période de location</h3>
         <h3 className="toUppercase">Protection et options</h3>
         <h3 className="toUppercase">Frais</h3>
         <h3 className="toUppercase">Total</h3>
-      </div>
+      </div> */}
 
       {/* Content */}
       <div className='flex-center-between'>

@@ -81,3 +81,12 @@
     background-color: #fff;
     margin: 20px 0;
 }
+
+.priceDetail{
+    cursor: pointer;
+}
+
+.priceDetail:hover{
+    cursor: pointer;
+    color: #000
+}

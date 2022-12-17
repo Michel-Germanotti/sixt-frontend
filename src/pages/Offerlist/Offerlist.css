@@ -66,7 +66,7 @@ input[type='checkbox'] {
 }
 
 .modal-container{
-    display: flex;
+    /* display: flex; */
     justify-content: space-between; 
     align-items: center;   
     position: fixed;
@@ -126,8 +126,7 @@ input[type='checkbox'] {
 }
 
 .btn-select{
-    width: 100%;
-    background-color: #ff5f00;
+    width: 90%;    background-color: #ff5f00;
     text-align: center;
     padding: 30px;
     font-weight: 900;

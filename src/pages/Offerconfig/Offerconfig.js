@@ -18,7 +18,7 @@ import Search from '../../components/Search/Search'
 
   // import required modules
   import { Pagination, Navigation } from "swiper";
-import { useNavigate } from 'react-router-dom';
+  import { useNavigate } from 'react-router-dom';
 
 
 export default function Offerconfig({setSelectCar}) {
@@ -35,6 +35,10 @@ export default function Offerconfig({setSelectCar}) {
   // Afficher toutes les options
   const [allOptions, setAllOptions] = useState(false);
   const [isActive, setIsActive] = useState(false);
+
+  // Modal
+  const [display, setDisplay] = useState("none");
+
 
   useEffect(() => {
     const getData = async ()  => {
@@ -85,6 +89,17 @@ export default function Offerconfig({setSelectCar}) {
   return isLoading ? <p>Loading... </p> : (
     <div> 
       <Search />
+
+      {/* Modal détail du prix */}
+      <div style={{display : display}}>
+        <h2 className="toUppercase">Détails du prix</h2>
+        <h3 className="toUppercase">Période de location</h3>
+        <h3 className="toUppercase">Protection et options</h3>
+        <h3 className="toUppercase">Frais</h3>
+        <h3 className="toUppercase">Total</h3>
+      </div>
+
+      {/* Content */}
       <div className='flex-center-between'>
         {/* Titre */}
         <h2 className='car-description toUppercase' style={{position: "absolute", top: "35vh", left: "2vw"}}><span>{Cookies.get("model")}</span></h2>
@@ -173,10 +188,9 @@ export default function Offerconfig({setSelectCar}) {
               <div className='white mb-10'><FontAwesomeIcon icon={faEuroSign} />  {Math.round(totalConfig * 100) / 100}</div>
             </div>
             <div className='flex-center-between'>
-              <div className='white'>Détails du prix</div>
+              <div className='white priceDetail'>Détails du prix</div>
               <div className='white'>Taxes incluses</div>
             </div>
-
             <div>
               <div className='toUppercase btn-select btn-continue' onClick={() => {navigate("/personnaldetails")}}>Continuer</div>
             </div>

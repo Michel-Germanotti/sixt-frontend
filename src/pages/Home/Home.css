@@ -6,3 +6,8 @@
 .searchComponent{
     z-index: 2;
 }
+
+.flex-wrap-align-center{
+    flex-wrap: wrap;
+    align-items: center;
+}

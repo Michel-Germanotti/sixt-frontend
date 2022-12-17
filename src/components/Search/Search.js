@@ -18,7 +18,6 @@ export default function Search() {
   // States
   const [display, setDisplay] = useState("block");
 
-
     // Calcul entre 2 dates
       // States of datepicker
       const [startDate, setStartDate] = useState(new Date());

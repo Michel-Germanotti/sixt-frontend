@@ -3,11 +3,28 @@ header{
     /* border-bottom: #ff5f00 solid 2px; */
 }
 
-.numbers{
+.numbersOn{
     background-color: #ff5f00;
     padding: 10px 15px;
     margin: 0 20px;
     color: #fff;
     width: 50px;
     border-radius: 100%;
+}
+
+.textOn{
+    color: #ff5f00;
+}
+
+.numbersOff{
+    background-color: #b2b2b2;
+    color: #fff;
+    padding: 10px 15px;
+    margin: 0 20px;
+    width: 50px;
+    border-radius: 100%;
+}
+
+.textOff{
+    color: #b2b2b2;
 }

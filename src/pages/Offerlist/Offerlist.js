@@ -41,6 +41,7 @@ export default function Offerlist({setSelectCar}) {
 
   // Modal
   const [carInfos, setCarInfos] = useState();
+  const [carouselInfo, setCarouselInfo] = useState();
 
   useEffect(() => {
     setSelectCar(1);
@@ -93,12 +94,12 @@ export default function Offerlist({setSelectCar}) {
 
   // Modal
   const setModal = async (display, car) => {
-    console.log(car)
-    // const response = await axios.post("https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentalconfigurations/create", car.id);
-    // console.log(response);
-    console.log(car.id);
     setCarInfos(car);
     if(display){
+      // Récup les images pour le carousel
+      const responseCarousel = await axios.post("https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentalconfigurations/create", { offerId :car.id});
+      console.log(responseCarousel.data);
+      setCarouselInfo(responseCarousel.data);
       setDisplayModal("flex");
     } else {
       setDisplayModal("none");
@@ -122,24 +123,44 @@ export default function Offerlist({setSelectCar}) {
         <div className='modal-container' style={{display: displayModal}} >
           <div className='closeModal' onClick={() => setModal(false, "")}><FontAwesomeIcon icon={faXmark} /></div>
             <div className="modal-description">
-                <div>
-                    <div className="description-header" style={{position: "relative", top: 50}}>
+                <div style={{maxWidth: 800, minHeight:600}} >
+                    {/* Description */}
+                    <div className="description-header" style={{position: "relative", top: 50, marginBottom: 100}}>
                       <p className='fs-25' style={{marginBottom: 20}}>{carInfos.headlines.description} {carInfos.headlines.shortSubline}</p>
-                      <div style={{display: "flex", gap: 20}}>
-                        <p><FontAwesomeIcon icon={faWheelchairMove} /> {carInfos.carGroupInfo.maxPassengers} sièges</p>
-                        <p><FontAwesomeIcon icon={faPersonThroughWindow} /> {carInfos.carGroupInfo.doors} portes</p>
-                        <p><FontAwesomeIcon icon={faGauge} /> {carInfos.carGroupInfo.automatic ? "Automatique" : "Manuel"}</p>
-                        <p><FontAwesomeIcon icon={faSuitcase} /> {carInfos.carGroupInfo.baggage} Bagages</p>
-                        <p><FontAwesomeIcon icon={faSnowflake} /> {carInfos.carGroupInfo.airCondition && "Climatisation"}</p>
-                        <p><FontAwesomeIcon icon={faCalendarDays} /> {carInfos.carGroupInfo.driverMinAge} ans</p>
+                        <div style={{display: "flex", gap: 20}}>
+                          <p><FontAwesomeIcon icon={faWheelchairMove} /> {carInfos.carGroupInfo.maxPassengers} sièges</p>
+                          <p><FontAwesomeIcon icon={faPersonThroughWindow} /> {carInfos.carGroupInfo.doors} portes</p>
+                          <p><FontAwesomeIcon icon={faGauge} /> {carInfos.carGroupInfo.automatic ? "Automatique" : "Manuel"}</p>
+                          <p><FontAwesomeIcon icon={faSuitcase} /> {carInfos.carGroupInfo.baggage} Bagages</p>
+                          <p><FontAwesomeIcon icon={faSnowflake} /> {carInfos.carGroupInfo.airCondition && "Climatisation"}</p>
+                          <p><FontAwesomeIcon icon={faCalendarDays} /> {carInfos.carGroupInfo.driverMinAge} ans</p>
+                        </div>
                       </div>
-                    </div>
                     <div>
-                      <img style={{width: "100%"}} src={carInfos.images.large} alt={carInfos.headlines.description}/>
-   
+                    <div className='flex-center-between' style={{position: "relative", bottom: 0}}>
+                    {/* Titre */}
+                    {/* <h2 className='car-description toUppercase' style={{position: "absolute", top: "35vh", left: "2vw"}}><span>{Cookies.get("model")}</span></h2> */}
+                    
+                      {/* Carousel */}
+                      <Swiper 
+                        slidesPerView={1}
+                        spaceBetween={30}
+                        loop={true}
+                        pagination={{
+                          clickable: true,
+                        }}
+                        navigation={true}
+                        modules={[Pagination, Navigation]}
+                        className="mySwiper">
+                          {/* Images */}
+                            {carouselInfo && carouselInfo.splashImages.map((image, index) => <SwiperSlide key={index}><img style={{width: "100%"}}src={image} alt="ff"/></SwiperSlide>)}
+                        </Swiper>
                     </div>
                   </div>
-                <div className='total'>
+                </div>
+
+                  {/* Total */}
+                  <div className='total'>
                     <div>
                         <div className='toUppercase fs-30' >Total</div>
                         <div>
@@ -165,11 +186,10 @@ export default function Offerlist({setSelectCar}) {
           </div>
 
           {/* Checkbox */}
-          <div id='checkbox' style={{display: display}} >
-              Réinitialiser
+          <div id='checkbox' style={{display: display}}>
             <div>
               
-              <div>
+              <div >
                 <input 
                     type="checkbox" 
                     name="cabriolet" 

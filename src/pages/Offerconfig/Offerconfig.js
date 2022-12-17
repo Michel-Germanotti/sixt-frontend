@@ -89,20 +89,20 @@ export default function Offerconfig({setSelectCar}) {
         {/* Titre */}
         <h2 className='car-description toUppercase' style={{position: "absolute", top: "35vh", left: "2vw"}}><span>{Cookies.get("model")}</span></h2>
         
-        {/* Carousel */}
-        <Swiper 
-          slidesPerView={1}
-          spaceBetween={30}
-          loop={true}
-          pagination={{
-            clickable: true,
-          }}
-          navigation={true}
-          modules={[Pagination, Navigation]}
-          className="mySwiper">
-            {/* Images */}
-              {data.splashImages.map((image, index) => <SwiperSlide key={index}><img style={{width: "100%"}}src={image} alt="ff"/></SwiperSlide>)}
-          </Swiper>
+          {/* Carousel */}
+          <Swiper 
+            slidesPerView={1}
+            spaceBetween={30}
+            loop={true}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            modules={[Pagination, Navigation]}
+            className="mySwiper">
+              {/* Images */}
+                {data.splashImages.map((image, index) => <SwiperSlide key={index}><img style={{width: "100%"}}src={image} alt="ff"/></SwiperSlide>)}
+            </Swiper>
         </div>
           
           {/* Baseline */}
@@ -138,7 +138,7 @@ export default function Offerconfig({setSelectCar}) {
                         index < 5 &&
                         <div className='optionsCards'  onClick={(event) =>  handleClick(item.price.amount, event)}>
                             
-                          <div on>
+                          <div>
                             <h3 className='toUppercase'>{item.title}</h3>
                             <p>{item.description}</p></div>
                             <p><FontAwesomeIcon icon={faEuroSign} /> {item.price.amount} {item.price.unit} </p>

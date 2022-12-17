@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function Header({selectCar , setSelectCar}) {
 
+  console.log(selectCar);
 
   return selectCar === 0 ? (
     <header>
@@ -29,11 +30,23 @@ export default function Header({selectCar , setSelectCar}) {
       <div className='flex-center-between'>
         <Link to="/"><img src={logo} style={{width: 164}} alt="logo" /></Link>       
       </div>
+      
+      {/* Étapes de la réservation */}
       <div className='flex-center-between'>
-        <div className='toUppercase'><span className='numbers'>1</span> Sélection des véhicules</div>
-        <div className='toUppercase'><span className='numbers'>2</span> Protections et options</div>
-        <div className='toUppercase'><span className='numbers'>3</span> Conducteur</div>   
+        <div className='toUppercase flex-center-between' style={{flexWrap: "wrap"}}>
+          <div><span className='numbersOn'>1</span></div> 
+          <div className='textOn'>Sélection des véhicules</div>
+        </div>
+        <div className='toUppercase flex-center-between' style={{flexWrap: "wrap"}}>
+          <div><span className={selectCar > 1 ? 'numbersOn' : 'numbersOff'}>2</span></div> 
+          <div className={selectCar > 1 ? 'textOn' : 'textOff'}>Protections et options</div></div>
+        <div className='toUppercase flex-center-between' style={{flexWrap: "wrap"}}>
+          <div><span className={selectCar > 2 ? 'numbersOn' : 'numbersOff'}>3</span></div> 
+          <div className={selectCar > 2 ? 'textOn' : 'textOff'}>Conducteur</div>
+        </div>   
       </div>
+
+      
       <div className='flex-center-between'>
           <div><FontAwesomeIcon icon={faGlobe} /></div>
           <div className='toUppercase'>backoffice</div>

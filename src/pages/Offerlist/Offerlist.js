@@ -111,7 +111,7 @@ export default function Offerlist({setSelectCar}) {
   const toConfig = (model, subline) => {
     Cookies.set("model", model );
     Cookies.set("subline", subline);
-    navigate('/offerconfig', Cookies.set("sélectionLocationId", carInfos.id), Cookies.set("totalSansOptions", dateDiffCalc(carInfos.prices.dayPrice.amount)))
+    navigate('/offerconfig', Cookies.set("sélectionLocationId", carInfos.id), Cookies.set("totalSansOptions", dateDiffCalc(carInfos.prices.dayPrice.amount)), Cookies.set("dayPrice", carInfos.prices.dayPrice.amount))
   }
 
   return isLoading ? <p>Loading...</p> : (
@@ -189,7 +189,7 @@ export default function Offerlist({setSelectCar}) {
           <div id='checkbox' style={{display: display}}>
             <div>
               
-              <div >
+              <div>
                 <input 
                     type="checkbox" 
                     name="cabriolet" 

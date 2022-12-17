@@ -1,4 +1,4 @@
-import { faCheck, faEuroSign } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faEuroSign, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Cookies from 'js-cookie'
@@ -37,12 +37,11 @@ export default function Offerconfig({setSelectCar}) {
   const [isActive, setIsActive] = useState(false);
 
   // Modal
-  // const [display, setDisplay] = useState("none");
+  const [display, setDisplay] = useState("none");
 
 
   useEffect(() => {
     const getData = async ()  => {
-      setSelectCar(2);
       try {
         const response = await axios.post("https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentalconfigurations/create", { offerId :Cookies.get("sélectionLocationId")});
         // const response = await axios.post("http://localhost:4000/rentalconfigurations/create", { offerId :Cookies.get("sélectionLocationId")});
@@ -53,6 +52,7 @@ export default function Offerconfig({setSelectCar}) {
         console.log(error);
       }
     };
+    setSelectCar(2);
     getData();
   }, [])
 
@@ -61,7 +61,7 @@ export default function Offerconfig({setSelectCar}) {
   const handleClick = (price, event) => {
       let nb = Number(Cookies.get("totalSansOptions"));
 
-    if (!isActive) {
+      if (!isActive) {
 
       // Toggle of class
       event.currentTarget.classList.remove('optionsCards');
@@ -91,13 +91,33 @@ export default function Offerconfig({setSelectCar}) {
       <Search />
 
       {/* Modal détail du prix */}
-      {/* <div style={{display : display}}>
-        <h2 className="toUppercase">Détails du prix</h2>
-        <h3 className="toUppercase">Période de location</h3>
-        <h3 className="toUppercase">Protection et options</h3>
-        <h3 className="toUppercase">Frais</h3>
-        <h3 className="toUppercase">Total</h3>
-      </div> */}
+      <div style={{display : display}} className="modalConfigContainer">
+        <div  className='modalConfigDescription'>
+        <div className='closeModalConfig' onClick={() => setDisplay("none")}><FontAwesomeIcon icon={faXmark} /></div>
+
+          <h2 className="toUppercase" style={{fontSize: 70, fontWeight: 900, marginBottom: 70}}>Détails du prix</h2>
+          <div style={{marginBottom: 70}}>
+            <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Période de location</h3>
+            <div className='flex-center-between'>
+              <p>Durée du location ({Cookies.get("dateDiff")} jours x {Cookies.get("dayPrice")})</p>
+              <p><FontAwesomeIcon icon={faEuroSign} />  {Math.round(totalConfig * 100) / 100}</p>
+            </div>
+          </div>
+
+          <div style={{marginBottom: 70}}>
+            <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Protection et options</h3>
+            
+          </div>
+
+          <div style={{marginBottom: 70}}>
+            <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Frais</h3>
+          </div>
+          <div style={{marginBottom: 70}}>
+            <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Total</h3>
+          </div>
+        </div>
+      </div>
+      
 
       {/* Content */}
       <div className='flex-center-between'>
@@ -188,7 +208,7 @@ export default function Offerconfig({setSelectCar}) {
               <div className='white mb-10'><FontAwesomeIcon icon={faEuroSign} />  {Math.round(totalConfig * 100) / 100}</div>
             </div>
             <div className='flex-center-between'>
-              <div className='white priceDetail'>Détails du prix</div>
+              <div className='white priceDetail' onClick={() => setDisplay('flex')}>Détails du prix</div>
               <div className='white'>Taxes incluses</div>
             </div>
             <div>

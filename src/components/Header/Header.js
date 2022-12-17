@@ -12,7 +12,7 @@ export default function Header({selectCar , setSelectCar}) {
     <header>
       <nav className='flex-center-between'>
         <div className='flex-center-between'>
-          <Link to="/" ><img onClick={() => setSelectCar(0)} src={logo} style={{width: 164}} alt="logo" /></Link>
+          <Link to="/" ><img  src={logo} style={{width: 164}} alt="logo" /></Link>
           <div className='toUppercase'>Rent</div>
           <div className='toUppercase'>Share</div>
           <div className='toUppercase'>Ride</div>
@@ -45,8 +45,6 @@ export default function Header({selectCar , setSelectCar}) {
           <div className={selectCar > 2 ? 'textOn' : 'textOff'}>Conducteur</div>
         </div>   
       </div>
-
-      
       <div className='flex-center-between'>
           <div><FontAwesomeIcon icon={faGlobe} /></div>
           <div className='toUppercase'>backoffice</div>

@@ -90,3 +90,38 @@
     cursor: pointer;
     color: #000
 }
+
+.modalConfigContainer{
+    justify-content: space-between; 
+    align-items: center;   
+    position: fixed;
+    top:0px;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.47);
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.modalConfigDescription{
+    /* display: flex;
+    justify-content: space-between; */
+    flex-wrap: wrap;
+    z-index: 1;
+    color: #000;
+    width: 100%;
+    background-color: #fff;
+    font-size: 20px;
+    padding: 85px;
+    width: 60vw;
+    margin: auto;
+}
+
+.closeModalConfig{
+    font-size: 25px;
+    position: absolute;
+    bottom: 85vh;
+    right: 20vw;
+    z-index: 2;
+    cursor: pointer;
+}

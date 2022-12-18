@@ -23,6 +23,12 @@ import Header from '../../components/Header/Header';
 
 export default function Offerconfig({setSelectCar}) {
 
+
+  // Frais
+  const redevanceImmat = 12.33;
+  const redevanceUsage = 13.20;
+  const fraisRecup = 129.29;
+
   const navigate = useNavigate();
 
   // States
@@ -67,16 +73,19 @@ export default function Offerconfig({setSelectCar}) {
       event.currentTarget.classList.remove('optionsCards');
       event.currentTarget.classList.add('optionsCardsSelect');
 
+      console.log(item.title);
       // Je créer une copie du state options
       let copyOfOptions = [...options];
-
+      console.log(options)
+      
       // Je push item dans copyOfOptions
       copyOfOptions.push(item);
 
       // J'envoi la copie dans le state options
-      setOptions(copyOfOptions);
+      setOptions(copyOfOptions); 
 
       // J'ajoute le prix au total
+      // setTotalConfig(Number(totalConfig) +  (Cookies.get("dateDiff") * item.price.amount));
       setTotalConfig(Number(totalConfig) + (Cookies.get("dateDiff") * item.price.amount));
     } 
     else {
@@ -93,10 +102,9 @@ export default function Offerconfig({setSelectCar}) {
       setOptions(filterOptions);
       // console.log("filter => ", filterOptions);
 
+      // setTotalConfig(Number(totalConfig) - (Cookies.get("dateDiff") * item.price.amount) );
       setTotalConfig(Number(totalConfig) - (Cookies.get("dateDiff") * item.price.amount));
     }
-
-    console.log(totalSansOptions);
   }
 
   const selectCar = 2;
@@ -123,7 +131,7 @@ export default function Offerconfig({setSelectCar}) {
           </div>
 
           <div style={{marginBottom: 30}}>
-            <h3 className="toUppercase" style={{fontSize: 25, fontWeight: 500, marginBottom: 20}}>Protection et options</h3>
+            <h3 className="toUppercase" style={{fontSize: 25, fontWeight: 500, marginBottom: 20}}>Protections et options</h3>
             <div className='flex-center-between'>
               <div>{options.map((item, index) => <p key={index} style={{marginBottom: 20}}>{item.title}</p>)}</div>
               <div>{options.map((item, index) => <p key={index} style={{marginBottom: 20, textAlign: "right"}}><FontAwesomeIcon icon={faEuroSign} />  {Math.round(Cookies.get("dateDiff") * item.price.amount * 100) / 100}</p>)}</div>
@@ -148,7 +156,10 @@ export default function Offerconfig({setSelectCar}) {
           </div>
           <div className='flex-center-between'>
             <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Total</h3>
-            <div ><FontAwesomeIcon icon={faEuroSign} /> {Math.round(totalConfig * 100) / 100}</div>
+            <div>
+              <FontAwesomeIcon icon={faEuroSign} /> 
+              {Math.round((Number(totalConfig) + redevanceImmat + redevanceUsage + fraisRecup) * 100) / 100}
+            </div>
           </div>
           <div style={{textAlign: "right"}}>Taxes incluses</div>
         </div>
@@ -241,14 +252,14 @@ export default function Offerconfig({setSelectCar}) {
           <div className='sticky'>
             <div className='flex-center-between'>
               <div className='mb-10 toUppercase'>Total</div>
-              <div className='white mb-10'><FontAwesomeIcon icon={faEuroSign} />  {Math.round(totalConfig * 100) / 100}</div>
+              <div className='white mb-10'><FontAwesomeIcon icon={faEuroSign} />  {Math.round((Number(totalConfig) + redevanceImmat + redevanceUsage + fraisRecup) * 100) / 100}</div>
             </div>
             <div className='flex-center-between'>
               <div className='white priceDetail' onClick={() => setDisplay('flex')}>Détails du prix</div>
               <div className='white'>Taxes incluses</div>
             </div>
             <div>
-              <div className='toUppercase btn-select btn-continue' onClick={() => {navigate("/personnaldetails"); Cookies.set("options",JSON.stringify(options)); Cookies.set("totalConfig", totalConfig)}}>Continuer</div>
+              <div className='toUppercase btn-select btn-continue' onClick={() => {navigate("/personnaldetails"); Cookies.set("options",JSON.stringify(options)); Cookies.set("totalConfig", Number(totalConfig) + redevanceImmat + redevanceUsage + fraisRecup)}}>Continuer</div>
             </div>
           </div>
       </div>

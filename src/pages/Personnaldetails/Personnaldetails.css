@@ -15,6 +15,20 @@ h1.toUppercase{
     margin-bottom: 20px;
 }
 
+.select{
+    border: none;
+    border-bottom: 1px solid #b2b2b2;
+    margin-bottom: 20px;
+}
 
+.btn-reserve{
+    background-color: #ff5f00;
+    width: 15vw;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    margin-top: 40px;
+}
 
 

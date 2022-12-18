@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 export default function Header({selectCar}) {
 
-  console.log(selectCar);
 
+  
   return selectCar === 0 ? (
     <header>
       <nav className='flex-center-between'>

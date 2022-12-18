@@ -50,7 +50,7 @@ export default function Offerlist({setSelectCar}) {
       const url = Cookies.get('result') ? Cookies.get('result') : `https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentaloffers?pickupStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&returnStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&pickupDate=2022-12-05T09:47:53&returnDate=2022-12-14T09:47:53`;
       const response = await axios.get(url);
       // Nombre d'offres
-      console.log(response.data);
+      // console.log(response.data);
       setData(response.data);
       setDataFilter(response.data);
       setIsLoading(false);
@@ -62,7 +62,7 @@ export default function Offerlist({setSelectCar}) {
 
     // Je compte le nombre d'éléments du tableau
     let count = Cookies.get('countOffers');
-    console.log(count);
+    // console.log(count);
 
     // Affiche et désactive checkbox catégories
     const toggleDisplay = (display) => {
@@ -98,7 +98,7 @@ export default function Offerlist({setSelectCar}) {
     if(display){
       // Récup les images pour le carousel
       const responseCarousel = await axios.post("https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentalconfigurations/create", { offerId :car.id});
-      console.log(responseCarousel.data);
+      // console.log(responseCarousel.data);
       setCarouselInfo(responseCarousel.data);
       setDisplayModal("flex");
     } else {

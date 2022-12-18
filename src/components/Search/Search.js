@@ -36,7 +36,7 @@ export default function Search() {
           setInputValue(inputValue);
         const response = await axios.get(`https://site--sixt-backend--pb6rn2qrqzj6.code.run/locations?q=${location}`);
         // const response = await axios.get(`http://localhost:4000/locations?q=${location}`);
-        console.log(response.data);
+        // console.log(response.data);
         Cookies.set("reponseFilter", response.data);
         // console.log(response.data);
         setAutocomplete(response.data);
@@ -49,7 +49,7 @@ export default function Search() {
       
       // ------- Infos -------
       const url = `https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentaloffers?pickupStation=${dropdown.id}&returnStation=${dropdown.id}&pickupDate=${startDate.toJSON().slice(0, 19)}&returnDate=${returnDate.toJSON().slice(0, 19)}`;
-      console.log(url);
+      // console.log(url);
       // Je stock l'url dans les cookies pour pouvoir faire une nouvelle requête
       Cookies.set('result', url);
        

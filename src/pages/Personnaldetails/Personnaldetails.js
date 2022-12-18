@@ -1,25 +1,26 @@
 import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
-import { useEffect, useRef } from "react"
+import { useEffect, useState } from "react"
 import Country from '../../assets/country.json';
 import Header from "../../components/Header/Header";
 
 export default function Personnaldetails({setSelectCar}) {
 
   // Form
-  const gender = useRef("");
-  const societe = useRef("");
-  const prenom = useRef("");
-  const famille= useRef("");
-  const mail= useRef("");
-  const indicatif = useRef("");
-  const telephone = useRef("");
-  const rue = useRef("");
-  const cp = useRef("");
-  const ville= useRef("");
-  const pays = useRef("");
-  const naissance = useRef("");
+  const [gender, setGender] = useState("");
+  const [societe, setSociete] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [famille, setFamille] = useState("");
+  const [mail, setMail] = useState("");
+  const [indicatif, setIndicatif] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [rue, setRue] = useState("");
+  const [cp, setCp] = useState("");
+  const [ville, setVille] = useState("");
+  const [pays, setPays] = useState("");
+  const [naissance, setNaissance] = useState("");
+  
   
   useEffect(() => {
     Cookies.set("selectCar", 3);
@@ -27,14 +28,13 @@ export default function Personnaldetails({setSelectCar}) {
 
   const selectCar = 3;
 
-  // Est-ce que le formulaire a été rempli ?
- 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("societe", societe);
     formData.append("prenom", prenom);
+    formData.append("gender", gender);
     formData.append("famille", famille);
     formData.append("mail", mail);
     formData.append("indicatif", indicatif);
@@ -46,6 +46,7 @@ export default function Personnaldetails({setSelectCar}) {
     formData.append("naissance", naissance);
     console.log(societe);
     console.log(prenom);
+    console.log(gender);
     console.log(famille);
     console.log(mail);
     console.log(indicatif);
@@ -56,10 +57,6 @@ export default function Personnaldetails({setSelectCar}) {
     console.log(pays);
     console.log(naissance);
   };
-
-  const handleClick = (handle, event) => {
-    handle.current = event;
-  }
 
 
   return (
@@ -76,12 +73,18 @@ export default function Personnaldetails({setSelectCar}) {
 
               <div className="civility" style={{marginBottom: 60}}>
                 <input 
-                  onChange={event => {handleClick(gender, event.target.value);}}
+                  onChange={event => {
+                    const value = event.target.value;
+                    setGender(value);
+                  }}
                   type="radio" 
                   value="Monsieur" 
                   name="gender" /> M.
                 <input 
-                  onChange={event => {handleClick(gender, event.target.value);}}
+                  onChange={event => {
+                    const value = event.target.value;
+                    setGender(value);
+                  }}
                   type="radio" 
                   value="Madame" 
                   name="gender" /> Mme
@@ -90,7 +93,10 @@ export default function Personnaldetails({setSelectCar}) {
               <div>
                 <div style={{marginBottom: 30}}>
                   <input 
-                    onChange={event => {handleClick(societe, event.target.value);}}
+                    onChange={event => {
+                      const value = event.target.value;
+                      setSociete(value);
+                    }}
                     className="input" 
                     type="text" 
                     name="societe" 
@@ -98,7 +104,10 @@ export default function Personnaldetails({setSelectCar}) {
                 </div>
                 <div style={{marginBottom: 30}}>
                   <input 
-                    onChange={event => {handleClick(prenom, event.target.value);}}
+                    onChange={event => {
+                      const value = event.target.value;
+                      setPrenom(value);
+                    }}
                     className="input" 
                     type="text" 
                     name="prenom" 
@@ -106,15 +115,20 @@ export default function Personnaldetails({setSelectCar}) {
                 </div>
                 <div style={{marginBottom: 30}}>
                   <input 
-                    onChange={event => {handleClick(mail, event.target.value);}}
+                    onChange={event => {
+                      const value = event.target.value;
+                      setMail(value);
+                    }}
                     className="input" 
                     type="email"
-                    name="mail"
                     placeholder="Adresse mail *"  />
                 </div>
                 <div style={{marginBottom: 30}}>
                   <input 
-                    onChange={event => {handleClick(rue ,event.target.value);}}
+                    onChange={event => {
+                      const value = event.target.value;
+                      setRue(value);
+                    }}
                     className="input" 
                     type="text" 
                     placeholder="Rue *"  />
@@ -125,14 +139,20 @@ export default function Personnaldetails({setSelectCar}) {
                   name="" 
                   id="" 
                   className="input" 
-                  onChange={event => {handleClick(pays, event.target.value);}}
+                  onChange={event => {
+                      const value = event.target.value;
+                      setPays(value);
+                    }}
                   >{Country.map((item) => <option>{item.country}</option>)}
                 </select>
               </div>
               <div>
                 <h2 style={{marginBottom: 20}} className='toUppercase'>Date de naissance</h2>
                 <input 
-                  onChange={event => {handleClick(naissance, event.target.value);}}
+                  onChange={event => {
+                    const value = event.target.value;
+                    setNaissance(value);
+                  }}
                   type="date" 
                   id="start" 
                   name="naissance" 
@@ -141,14 +161,14 @@ export default function Personnaldetails({setSelectCar}) {
               </div>
             </div>
 
-
-
-
             {/* Droite */}
               <div>
                 <div>
                   <input 
-                    onChange={event => {handleClick(famille, event.target.value);}}
+                    onChange={event => {
+                      const value = event.target.value;
+                      setFamille(value);
+                    }}
                     className="input" 
                     type="text" 
                     placeholder="Nom de famille *"/>
@@ -158,13 +178,19 @@ export default function Personnaldetails({setSelectCar}) {
                     <select 
                       name="" 
                       id=""
-                      onChange={event => {handleClick(indicatif, event.target.value);}}>
+                      onChange={event => {
+                        const value = event.target.value;
+                        setIndicatif(value);
+                      }}>
                     {Country.map((item) => <option >+ {item.code}</option>)}
                     </select>
                   </div>
                   <div>
                     <input 
-                      onChange={event => {handleClick(telephone, event.target.value);}}
+                      onChange={event => {
+                        const value = event.target.value;
+                        setTelephone(value);
+                      }}
                       className="input" 
                       type="tel" 
                       placeholder="Numéro de téléphone *"/>
@@ -173,14 +199,19 @@ export default function Personnaldetails({setSelectCar}) {
                 <div className="flex-space-between">
                   <div>
                     <input 
-                      onChange={event => {handleClick(cp, event.target.value);
+                      onChange={event => {
+                        const value = event.target.value;
+                        setCp(value);
                       }}
                       type="text" 
                       placeholder="Code postal *"/>
                   </div>
                   <div>
                     <input 
-                      onChange={event => {handleClick(ville, event.target.value); }}
+                      onChange={event => {
+                        const value = event.target.value;
+                        setVille(value);
+                      }}
                       className="input" 
                       type="text" 
                       placeholder="Ville *"/>
@@ -191,7 +222,6 @@ export default function Personnaldetails({setSelectCar}) {
 
             <div style={{marginBottom: 80}}>
           <div  className='modalConfigDescription' style={{padding: 0, margin: 0}}>
-          {/* <div className='closeModalConfig' onClick={() => setDisplay("none")}><FontAwesomeIcon icon={faXmark} /></div> */}
 
             <h2 className="toUppercase" style={{fontSize: 30, fontWeight: 900, marginBottom: 70}}>Détails du prix</h2>
             <div style={{marginBottom: 50}}>

@@ -1,0 +1,20 @@
+.rabbit{
+    position: absolute;
+    top: 25px;
+    right: 500px;
+    z-index: 0;
+}
+
+.closeRabbit{
+    position: absolute;
+    font-size: 75px;
+    color: #fff;
+    z-index: 3;
+    left: 670px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.closeRabbit:hover{
+    color: #ff5f00;
+}

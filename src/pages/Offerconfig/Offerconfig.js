@@ -14,12 +14,10 @@ import Search from '../../components/Search/Search'
   import "swiper/css/pagination";
   import "swiper/css/navigation";
 
-  // import "./styles.css";
-
   // import required modules
   import { Pagination, Navigation } from "swiper";
   import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Header/Header';
+  import Header from '../../components/Header/Header';
 
 export default function Offerconfig({setSelectCar}) {
 

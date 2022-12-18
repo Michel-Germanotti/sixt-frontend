@@ -20,7 +20,7 @@ export default function Header({selectCar}) {
         </div>
         <div className='flex-center-between'>
           <div><FontAwesomeIcon icon={faGlobe} /></div>
-          <div className='toUppercase'>backoffice</div>
+          <div className='toUppercase'><Link className='backoffice' to="/backoffice">backoffice</Link></div>
         </div>
       </nav>
     </header>
@@ -47,7 +47,7 @@ export default function Header({selectCar}) {
       </div>
       <div className='flex-center-between'>
           <div><FontAwesomeIcon icon={faGlobe} /></div>
-          <div className='toUppercase'>backoffice</div>
+          <div className='toUppercase'><Link className='backoffice' to="/backoffice">backoffice</Link></div>
         </div>
     </nav>
   </header>

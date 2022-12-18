@@ -23,9 +23,9 @@ export default function Offerconfig({setSelectCar}) {
 
 
   // Frais
-  const redevanceImmat = 12.33;
-  const redevanceUsage = 13.20;
-  const fraisRecup = 129.29;
+  // const redevanceImmat = 12.33;
+  // const redevanceUsage = 13.20;
+  // const fraisRecup = 129.29;
 
   const navigate = useNavigate();
 
@@ -156,7 +156,7 @@ export default function Offerconfig({setSelectCar}) {
             <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Total</h3>
             <div>
               <FontAwesomeIcon icon={faEuroSign} /> 
-              {Math.round((Number(totalConfig) + redevanceImmat + redevanceUsage + fraisRecup) * 100) / 100}
+              {Math.round(Number(totalConfig) * 100) / 100}
             </div>
           </div>
           <div style={{textAlign: "right"}}>Taxes incluses</div>
@@ -250,14 +250,14 @@ export default function Offerconfig({setSelectCar}) {
           <div className='sticky'>
             <div className='flex-center-between'>
               <div className='mb-10 toUppercase'>Total</div>
-              <div className='white mb-10'><FontAwesomeIcon icon={faEuroSign} />  {Math.round((Number(totalConfig) + redevanceImmat + redevanceUsage + fraisRecup) * 100) / 100}</div>
+              <div className='white mb-10'><FontAwesomeIcon icon={faEuroSign} />  {Math.round(Number(totalConfig) * 100) / 100}</div>
             </div>
             <div className='flex-center-between'>
               <div className='white priceDetail' onClick={() => setDisplay('flex')}>Détails du prix</div>
               <div className='white'>Taxes incluses</div>
             </div>
             <div>
-              <div className='toUppercase btn-select btn-continue' onClick={() => {navigate("/personnaldetails"); Cookies.set("options",JSON.stringify(options)); Cookies.set("totalConfig", Number(totalConfig) + redevanceImmat + redevanceUsage + fraisRecup)}}>Continuer</div>
+              <div className='toUppercase btn-select btn-continue' onClick={() => {navigate("/personnaldetails"); Cookies.set("options",JSON.stringify(options)); Cookies.set("totalConfig", Number(totalConfig))}}>Continuer</div>
             </div>
           </div>
       </div>

@@ -21,6 +21,7 @@ import { faCar, faCheck, faChevronDown, faEuroSign, faGauge, faPersonThroughWind
 
 import { faCalendarDays, faSnowflake } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import Header from '../../components/Header/Header';
 
 export default function Offerlist({setSelectCar}) {
 
@@ -44,7 +45,7 @@ export default function Offerlist({setSelectCar}) {
   const [carouselInfo, setCarouselInfo] = useState();
 
   useEffect(() => {
-    setSelectCar(1);
+    Cookies.set("selectCar", 1);
     const getData = async ()  => {
       const url = Cookies.get('result') ? Cookies.get('result') : `https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentaloffers?pickupStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&returnStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&pickupDate=2022-12-05T09:47:53&returnDate=2022-12-14T09:47:53`;
       const response = await axios.get(url);
@@ -113,8 +114,12 @@ export default function Offerlist({setSelectCar}) {
     navigate('/offerconfig', Cookies.set("sélectionLocationId", carInfos.id), Cookies.set("totalSansOptions", dateDiffCalc(carInfos.prices.dayPrice.amount)), Cookies.set("dayPrice", carInfos.prices.dayPrice.amount))
   }
 
+  const selectCar = 1;
+
   return isLoading ? <p>Loading...</p> : (
     <div>
+      <Header selectCar={selectCar} />
+
       <Search />
 
       {/* Modal description (n'apparait que si carInfos n'est pas vide) */}

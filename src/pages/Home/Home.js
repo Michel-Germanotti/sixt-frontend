@@ -18,15 +18,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Search from '../../components/Search/Search';
 import { faApple, faGooglePlay } from '@fortawesome/free-brands-svg-icons';
 import { useEffect } from 'react';
+import Header from '../../components/Header/Header';
 
 export default function Home({setSelectCar}) {
 
   useEffect(() => {
-    setSelectCar(0);
   })
+
+  const selectCar = 0;
 
   return (
     <div>
+      <Header selectCar={selectCar} />
+
       <Search className='searchComponent'/>
 
       <Swiper 

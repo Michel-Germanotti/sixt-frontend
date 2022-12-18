@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 
-export default function Header({selectCar , setSelectCar}) {
+export default function Header({selectCar}) {
 
   console.log(selectCar);
 

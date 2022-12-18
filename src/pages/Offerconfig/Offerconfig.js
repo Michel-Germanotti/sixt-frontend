@@ -19,8 +19,7 @@ import Search from '../../components/Search/Search'
   // import required modules
   import { Pagination, Navigation } from "swiper";
   import { useNavigate } from 'react-router-dom';
-import { set } from 'date-fns';
-
+import Header from '../../components/Header/Header';
 
 export default function Offerconfig({setSelectCar}) {
 
@@ -54,7 +53,7 @@ export default function Offerconfig({setSelectCar}) {
         console.log(error);
       }
     };
-    setSelectCar(2);
+    Cookies.set("selectCar", 2);
     getData();
   }, [setSelectCar])
 
@@ -100,9 +99,12 @@ export default function Offerconfig({setSelectCar}) {
     console.log(totalSansOptions);
   }
 
+  const selectCar = 2;
 
   return isLoading ? <p>Loading... </p> : (
     <div> 
+      <Header selectCar={selectCar} />
+
       <Search />
 
       {/* Modal détail du prix */}

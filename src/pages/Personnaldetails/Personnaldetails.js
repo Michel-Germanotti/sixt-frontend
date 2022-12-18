@@ -3,17 +3,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
 import { useEffect } from "react"
 import Country from '../../assets/country.json';
+import Header from "../../components/Header/Header";
 
 export default function Personnaldetails({setSelectCar}) {
 
   useEffect(() => {
-    setSelectCar(3);
+    Cookies.set("selectCar", 3);
     // console.log(JSON.parse(Cookies.get("options")));
     console.log(Cookies.get("totalConfig"));
   }, [])
 
+  const selectCar = 3;
+
+
   return (
     <div>
+      <Header selectCar={selectCar} />
+
       <div className='container' style={{marginTop: 50}}>
         <h1 className='toUppercase'>Informations Personnelles</h1>
 

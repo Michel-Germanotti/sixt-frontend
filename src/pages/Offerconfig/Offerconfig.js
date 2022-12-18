@@ -126,7 +126,7 @@ export default function Offerconfig({setSelectCar}) {
             <h3 className="toUppercase" style={{fontSize: 25, fontWeight: 500, marginBottom: 20}}>Protection et options</h3>
             <div className='flex-center-between'>
               <div>{options.map((item, index) => <p key={index} style={{marginBottom: 20}}>{item.title}</p>)}</div>
-              <div>{options.map((item, index) => <p key={index} style={{marginBottom: 20, textAlign: "right"}}><FontAwesomeIcon icon={faEuroSign} />  {Cookies.get("dateDiff") * item.price.amount}</p>)}</div>
+              <div>{options.map((item, index) => <p key={index} style={{marginBottom: 20, textAlign: "right"}}><FontAwesomeIcon icon={faEuroSign} />  {Math.round(Cookies.get("dateDiff") * item.price.amount * 100) / 100}</p>)}</div>
               
             </div>
           </div>

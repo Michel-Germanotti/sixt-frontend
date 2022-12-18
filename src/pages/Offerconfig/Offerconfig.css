@@ -104,8 +104,6 @@
 }
 
 .modalConfigDescription{
-    /* display: flex;
-    justify-content: space-between; */
     flex-wrap: wrap;
     z-index: 1;
     color: #000;
@@ -113,15 +111,15 @@
     background-color: #fff;
     font-size: 20px;
     padding: 85px;
-    width: 60vw;
+    width: 40vw;
     margin: auto;
 }
 
 .closeModalConfig{
     font-size: 25px;
     position: absolute;
-    bottom: 85vh;
-    right: 20vw;
+    bottom: 81vh;
+    right: 30vw;
     z-index: 2;
     cursor: pointer;
 }

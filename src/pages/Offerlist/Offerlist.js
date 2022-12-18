@@ -47,7 +47,6 @@ export default function Offerlist({setSelectCar}) {
     setSelectCar(1);
     const getData = async ()  => {
       const url = Cookies.get('result') ? Cookies.get('result') : `https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentaloffers?pickupStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&returnStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&pickupDate=2022-12-05T09:47:53&returnDate=2022-12-14T09:47:53`;
-      // const url = Cookies.get('result') ? Cookies.get('result') : `http://localhost:4000/rentaloffers?pickupStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&returnStation=L_ChIJq_pxynbe4EcR1pOfpO-rHD0&pickupDate=2022-12-05T09:47:53&returnDate=2022-12-14T09:47:53`;
       const response = await axios.get(url);
       // Nombre d'offres
       console.log(response.data);

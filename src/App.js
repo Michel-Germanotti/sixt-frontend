@@ -17,7 +17,8 @@ function App() {
 
   // Étapes du Header
   const [selectCar, setSelectCar] = useState(0);
-
+  const [mouveOption, setMouveOption] = useState();
+  const [mouveTotalSansOption, setMouveTotalSansOption] = useState();
   return (
     <Router>
       <Header selectCar={selectCar} setSelectCar={setSelectCar} />
@@ -25,8 +26,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home setSelectCar={setSelectCar}/>}/>
         <Route path='/offerlist' element={<Offerlist  setSelectCar={setSelectCar}/>}/>
-        <Route path='/offerconfig' element={<Offerconfig setSelectCar={setSelectCar}/>}/>
-        <Route path='/personnaldetails' element={<Personnaldetails setSelectCar={setSelectCar}/>}/>
+        <Route path='/offerconfig' element={<Offerconfig setSelectCar={setSelectCar} />}/>
+        <Route path='/personnaldetails' element={<Personnaldetails setSelectCar={setSelectCar} />}/>
         <Route path='/backoffice' element={<Backoffice />}/>
       </Routes>
 

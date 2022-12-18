@@ -19,6 +19,7 @@ import Search from '../../components/Search/Search'
   // import required modules
   import { Pagination, Navigation } from "swiper";
   import { useNavigate } from 'react-router-dom';
+import { set } from 'date-fns';
 
 
 export default function Offerconfig({setSelectCar}) {
@@ -30,22 +31,23 @@ export default function Offerconfig({setSelectCar}) {
   const [isLoading, setIsLoading] = useState(true);
 
   // Total des options
-  const [totalConfig, setTotalConfig] = useState(Cookies.get("totalSansOptions"));
+  const totalSansOptions = Cookies.get("totalSansOptions");
+  const [totalConfig, setTotalConfig] = useState(totalSansOptions);
 
   // Afficher toutes les options
-  const [allOptions, setAllOptions] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+  const [allOptions, setAllOptions] = useState();
 
   // Modal
   const [display, setDisplay] = useState("none");
 
+  // Options sélectionnées
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
     const getData = async ()  => {
       try {
         const response = await axios.post("https://site--sixt-backend--pb6rn2qrqzj6.code.run/rentalconfigurations/create", { offerId :Cookies.get("sélectionLocationId")});
-        // const response = await axios.post("http://localhost:4000/rentalconfigurations/create", { offerId :Cookies.get("sélectionLocationId")});
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -54,35 +56,48 @@ export default function Offerconfig({setSelectCar}) {
     };
     setSelectCar(2);
     getData();
-  }, [])
+  }, [setSelectCar])
 
 
   // Etat des options
-  const handleClick = (price, event) => {
-      let nb = Number(Cookies.get("totalSansOptions"));
+  const handleClick = (item, event) => {
 
-      if (!isActive) {
-
+    // Si on ne trouve pas de doublon
+    if(!options.includes(item)){
       // Toggle of class
       event.currentTarget.classList.remove('optionsCards');
       event.currentTarget.classList.add('optionsCardsSelect');
-      
-      // add price
-      Cookies.set("totalSansOptions", nb + price);
-      setTotalConfig(nb + price);
-      setIsActive(true);
-    } else{
-      
+
+      // Je créer une copie du state options
+      let copyOfOptions = [...options];
+
+      // Je push item dans copyOfOptions
+      copyOfOptions.push(item);
+
+      // J'envoi la copie dans le state options
+      setOptions(copyOfOptions);
+
+      // J'ajoute le prix au total
+      setTotalConfig(Number(totalConfig) + (Cookies.get("dateDiff") * item.price.amount));
+    } 
+    else {
       // Toggle of class
       event.currentTarget.classList.remove('optionsCardsSelect');
       event.currentTarget.classList.add('optionsCards');
-      
-      // remove price
-      Cookies.set("totalSansOptions", nb - price);
-      setTotalConfig(nb - price);
-      setIsActive(false);
-    } 
-    
+
+      // Je vérifie qu'il y ait un doublon
+        // console.log("includes => ", options.includes(item));
+
+      // Je cherche item dans le tableau
+      const filterOptions = options.filter((option) => option !== item);
+
+      setOptions(filterOptions);
+      // console.log("filter => ", filterOptions);
+
+      setTotalConfig(Number(totalConfig) - (Cookies.get("dateDiff") * item.price.amount));
+    }
+
+    console.log(totalSansOptions);
   }
 
 
@@ -95,26 +110,45 @@ export default function Offerconfig({setSelectCar}) {
         <div  className='modalConfigDescription'>
         <div className='closeModalConfig' onClick={() => setDisplay("none")}><FontAwesomeIcon icon={faXmark} /></div>
 
-          <h2 className="toUppercase" style={{fontSize: 70, fontWeight: 900, marginBottom: 70}}>Détails du prix</h2>
-          <div style={{marginBottom: 70}}>
-            <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Période de location</h3>
-            <div className='flex-center-between'>
+          <h2 className="toUppercase" style={{fontSize: 30, fontWeight: 900, marginBottom: 70}} >Détails du prix</h2>
+          <div style={{marginBottom: 50}}>
+
+            <h3 className="toUppercase" style={{fontSize: 25, fontWeight: 500, marginBottom: 20}}>Période de location</h3>
+            <div className='flex-center-between' style={{flexWrap: "wrap"}}>
               <p>Durée du location ({Cookies.get("dateDiff")} jours x {Cookies.get("dayPrice")})</p>
-              <p><FontAwesomeIcon icon={faEuroSign} />  {Math.round(totalConfig * 100) / 100}</p>
+              <p><FontAwesomeIcon icon={faEuroSign} />  {Math.round(totalSansOptions * 100) / 100}</p>
             </div>
           </div>
 
-          <div style={{marginBottom: 70}}>
-            <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Protection et options</h3>
-            
+          <div style={{marginBottom: 30}}>
+            <h3 className="toUppercase" style={{fontSize: 25, fontWeight: 500, marginBottom: 20}}>Protection et options</h3>
+            <div className='flex-center-between'>
+              <div>{options.map((item, index) => <p key={index} style={{marginBottom: 20}}>{item.title}</p>)}</div>
+              <div>{options.map((item, index) => <p key={index} style={{marginBottom: 20, textAlign: "right"}}><FontAwesomeIcon icon={faEuroSign} />  {Cookies.get("dateDiff") * item.price.amount}</p>)}</div>
+              
+            </div>
           </div>
 
-          <div style={{marginBottom: 70}}>
-            <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Frais</h3>
+          <div style={{marginBottom: 40}}>
+            <h3 className="toUppercase" style={{fontSize: 25, fontWeight: 500, marginBottom: 20}}>Frais</h3>
+            <div className='flex-center-between'>
+              <div style={{marginBottom: 20}}>Redevance d'immatriculation pour véhicule</div>
+              <div style={{marginBottom: 20, textAlign: "right"}}><FontAwesomeIcon icon={faEuroSign} />  12,33</div>
+            </div>
+            <div className='flex-center-between'>
+              <div style={{marginBottom: 20}}>Redevance d'usage des installations de transport et de clientèle</div>
+              <div style={{marginBottom: 20, textAlign: "right"}}><FontAwesomeIcon icon={faEuroSign} />  13,20</div>
+            </div>
+            <div className='flex-center-between'>
+              <div style={{marginBottom: 20}}>Frais de récupération dans une concéssion aéroportuaire</div>
+              <div style={{marginBottom: 20, textAlign: "right"}}><FontAwesomeIcon icon={faEuroSign} />  129,29</div>
+            </div>
           </div>
-          <div style={{marginBottom: 70}}>
+          <div className='flex-center-between'>
             <h3 className="toUppercase" style={{fontSize: 40, fontWeight: 500}}>Total</h3>
+            <div ><FontAwesomeIcon icon={faEuroSign} /> {Math.round(totalConfig * 100) / 100}</div>
           </div>
+          <div style={{textAlign: "right"}}>Taxes incluses</div>
         </div>
       </div>
       
@@ -171,7 +205,7 @@ export default function Offerconfig({setSelectCar}) {
                         !allOptions ?
                         // 5 options max
                         index < 5 &&
-                        <div className='optionsCards'  onClick={(event) =>  handleClick(item.price.amount, event)}>
+                        <div key={item.id} className='optionsCards'  onClick={(event) =>  handleClick(item, event)}>
                             
                           <div>
                             <h3 className='toUppercase'>{item.title}</h3>
@@ -180,7 +214,7 @@ export default function Offerconfig({setSelectCar}) {
                         </div>
                         :   
                         // Toutes les options
-                        <div className='optionsCards' onClick={(event) =>  handleClick(item.price.amount, event)}>
+                        <div key={item.id} className='optionsCards' onClick={(event) =>  handleClick(item, event)}>
                           <div>
                             <h3 className='toUppercase'>{item.title}</h3>
                             <p>{item.description}</p></div>
@@ -212,7 +246,7 @@ export default function Offerconfig({setSelectCar}) {
               <div className='white'>Taxes incluses</div>
             </div>
             <div>
-              <div className='toUppercase btn-select btn-continue' onClick={() => {navigate("/personnaldetails")}}>Continuer</div>
+              <div className='toUppercase btn-select btn-continue' onClick={() => {navigate("/personnaldetails"); Cookies.set("options",JSON.stringify(options)); Cookies.set("totalConfig", totalConfig)}}>Continuer</div>
             </div>
           </div>
       </div>

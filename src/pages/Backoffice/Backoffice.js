@@ -39,7 +39,7 @@ export default function Backoffice() {
         <div className="rabbit" style={{display: display}}>
           <div className='closeRabbit' onClick={() => setDisplay('none')}>X</div>
           <iframe 
-            src="https://giphy.com/embed/OBnwDJW77acLK" 
+            src="https://giphy.com/embed/OBnwDJW77acLK"  title='rabbit'
               width="750" height="750" frameBorder="0" class="giphy-embed" allowFullScreen>
           </iframe>
         </div>
